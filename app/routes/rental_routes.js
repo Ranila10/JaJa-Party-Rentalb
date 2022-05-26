@@ -43,10 +43,27 @@ router.post('/rentals', requireToken, (req, res, next) => {
     // can send an error message back to the client
     .catch(next)
 })
-
+router.get('/rentals', requireToken, (req, res, next) => {
+  Rental.find()
+    .then((rentals) => {
+      return rentals.filter((rental) => {
+        return rental.owner === req.user.id
+      })
+    })
+    .then(rentals => {
+      // `rentals` will be an array of Mongoose documents
+      // we want to convert each one to a POJO, so we use `.map` to
+      // apply `.toObject` to each one
+      return rentals.map(rental => rental.toObject())
+    })
+    // respond with status 200 and JSON of the examples
+    .then(rentals => res.status(200).json({ rentals: rentals }))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
 // INDEX
 // GET /events
-router.get('/rentals', (req, res, next) => {
+router.get('/allrentals', (req, res, next) => {
   Rental.find()
     .then(rentals => {
       // `rentals` will be an array of Mongoose documents
