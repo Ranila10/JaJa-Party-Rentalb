@@ -44,12 +44,13 @@ router.post('/rentals', requireToken, (req, res, next) => {
     .catch(next)
 })
 router.get('/rentals', requireToken, (req, res, next) => {
-  Rental.find()
-    .then((rentals) => {
-      return rentals.filter((rental) => {
-        return rental.owner === req.user.id
-      })
-    })
+  console.log(req.user)
+  Rental.find({owner: req.user.id})
+    // .then((rentals) => {
+    //   return rentals.filter((rental) => {
+    //     return rental.owner === req.user.id
+    //   })
+    // })
     .then(rentals => {
       // `rentals` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
