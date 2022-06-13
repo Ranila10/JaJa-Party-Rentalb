@@ -22,20 +22,26 @@ User Stories
 User will be able to sign up, sign in, sign out and change password.
 User will create a package and be able to update and delete it.
 
-Routes
-Endpoint	Component	AuthenticatedRoute?
-/sign-up	SignUp	No
-/sign-in	SignIn	No
-/change-password	ChangePassword	Yes
-/sign-out	SignOut	Yes
+API Routes
+User Authorization Routes
+HTTP Method	URL Path	Result	Action
+POST	/sign-up	create rental	create
+POST	/sign-in	get single rental	show or retrieve
+DELETE	/sign-out	delete rental	destroy
+PATCH	/change-password	update password	update
+Profile Routes
+HTTP Method	URL Path	Result	Action
+GET	/rentals	read list of rentals	index or list
+GET	/rentals/:id	read single rentals	show or retrieve
+POST	/rental	create rental	create
+PATCH	/rentals/:id	update rentals	update
+DELETE	/rentals/:id	delete rental	destroy
 
 Technologies Used
 Libraries	Languages	Frameworks	Database	Version Control	API
 React.js	HTML	Express	MongoDB	GitHub	Ghibli Studio API
 Axios	Javascript	BootStrap			
-Mongoose	CSS				
-
-
+Mongoose	CSS			
 
 ![App Wireframe](https://i.imgur.com/xLLKtko.png)
 
